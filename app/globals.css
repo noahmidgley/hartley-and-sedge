@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+:root {
+  /* cover — deep bracken cloth, carries the dominant field */
+  --color-cover: #24331f;
+  --color-cover-deep: #182417;
+  --color-cover-line: rgba(239, 230, 210, 0.16);
+
+  /* paper — warm oat/buff, never stark cream */
+  --color-paper: #f1e8d2;
+  --color-paper-deep: #e3d3ac;
+  --color-paper-line: rgba(36, 31, 26, 0.16);
+
+  /* ink */
+  --color-ink: #26201a;
+  --color-ink-soft: #5b4d3d;
+  --color-ink-on-cover: #efe6d0;
+  --color-ink-on-cover-soft: #aebd9c;
+
+  /* accent — muted quarry/brick, footpath-red, reserved */
+  --color-accent: #9c3a26;
+  --color-accent-deep: #7a2c1c;
+  --color-accent-soft: #e7c6b3;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@theme inline {
+  --color-cover: var(--color-cover);
+  --color-cover-deep: var(--color-cover-deep);
+  --color-paper: var(--color-paper);
+  --color-paper-deep: var(--color-paper-deep);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-ink-on-cover: var(--color-ink-on-cover);
+  --color-ink-on-cover-soft: var(--color-ink-on-cover-soft);
+  --color-accent: var(--color-accent);
+  --color-accent-deep: var(--color-accent-deep);
+  --color-accent-soft: var(--color-accent-soft);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-label: var(--font-label);
+}
+
+* {
+  border-color: var(--color-paper-line);
+}
+
+html {
+  background: var(--color-paper);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* a quiet paper grain, never a texture the eye reads as decoration */
+.grain {
+  isolation: isolate;
+}
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink-on-cover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
